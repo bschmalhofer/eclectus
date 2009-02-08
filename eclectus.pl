@@ -1,7 +1,6 @@
 #! perl
 
 # Copyright (C) 2007-2009, The Perl Foundation.
-# $Id$
 
 # A wrapper for running scheme scripts with Eclectus
 

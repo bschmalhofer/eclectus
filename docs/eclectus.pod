@@ -1,5 +1,3 @@
-# $Id$
-
 =head1 Eclectus
 
 Eclectus aims to be a Scheme to PIR compiler implemented in Scheme.

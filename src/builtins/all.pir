@@ -1,4 +1,3 @@
-# $Id$
 
 # Eclectus builtin subroutines
 

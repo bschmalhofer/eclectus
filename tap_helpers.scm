@@ -1,5 +1,3 @@
-; $Id$
-
 ;; some helpers for printing TAP, Test anything protocol
 
 (define skip-all

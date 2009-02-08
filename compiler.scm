@@ -1,4 +1,3 @@
-; $Id$
 
 ; Generate PAST for Eclectus
 

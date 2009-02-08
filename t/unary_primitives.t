@@ -1,4 +1,3 @@
-; $Id$
 
 (load "tests-driver.scm")
 (load "compiler.scm")

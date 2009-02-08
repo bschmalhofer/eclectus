@@ -1,4 +1,3 @@
-; $Id$
 
 (load "tap_helpers.scm")
 

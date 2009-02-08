@@ -1,5 +1,3 @@
-# $Id$
-
 # The dynamics PMCs used by Eclectus are loaded
 .loadlib 'eclectus_group'
 

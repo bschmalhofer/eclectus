@@ -1,4 +1,3 @@
-; $Id$
 
 ; This file in included by the scheme test scripts in t/*.t. It provides support
 ; for actually running the test cases set up in the *.t files.
