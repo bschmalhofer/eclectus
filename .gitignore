@@ -1,4 +1,5 @@
-Makefile
+/Makefile
+/eclectus_test_run.tar.gz
 /driver_nqp.pbc
 /src/builtins/all.pbc
 /src/pmc/eclectus_group.c

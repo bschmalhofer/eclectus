@@ -78,7 +78,7 @@ $verbosity ||= 0;
     if ( $archive_flag ) {
         my %env_data = Parrot::Harness::Smoke::collect_test_environment_data();
  
-        my $report_file = ['pipp_test_run.tar.gz'];
+        my $report_file = ['eclectus_test_run.tar.gz'];
         my $harness = TAP::Harness::Archive->new(
             {
                 exec             => $exec_sub,
@@ -92,7 +92,7 @@ $verbosity ||= 0;
 
         if ( $send_to_smolder_flag ) {
             $env_data{report_file} = $report_file;
-            $env_data{project_id}  = 10;
+            $env_data{project_id}  = 13;
             Parrot::Harness::Smoke::send_archive_to_smolder(%env_data);
         }
     } else {

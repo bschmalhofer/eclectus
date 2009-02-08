@@ -17,8 +17,8 @@ BUILD_DYNPMC    = $(PERL) @build_dir@/tools/build/dynpmc.pl
 #IF(darwin):export MACOSX_DEPLOYMENT_TARGET := @osx_version@
 
 # Set up directories
-PARROT_DYNEXT   = @build_dir@/runtime/parrot/dynext
-PMC_DIR         = src/pmc
+PARROT_DYNEXT = @build_dir@/runtime/parrot/dynext
+PMC_DIR       = src/pmc
 
 ECLECTUS_GROUP  = $(PMC_DIR)/eclectus_group@load_ext@
 PMCS            = \
@@ -42,20 +42,28 @@ PMC_SOURCES     = \
 # The default target
 default: build
 
+# This is a listing of all targets, that are meant to be called by users
 help :
 	@echo ""
 	@echo "Following targets are available for the user:"
 	@echo ""
+	@echo "Building:"
 	@echo "  build:             Builds the dynamic PMCSs needed by Eclectus."
 	@echo "                     This is the default target."
 	@echo ""
+	@echo "Testing:"
 	@echo "  test:              Run the test suite."
+	@echo "  smoke:             Run the test suite and send report to the smolder server"
 	@echo ""
-	@echo "  clean:             Clean up temporary files."
+	@echo "Cleaning:"
+	@echo "  clean:             Clean up."
+	@echo "  clean-test:        Clean up temporary files from testing."
+	@echo "  clean-pmc:         Clean up temporary files from the PMC build process."
+	@echo "  realclean:         Clean and remove Makefile."
 	@echo ""
-	@echo "  realclean:         Clean up generated files."
-	@echo ""
+	@echo "Misc:"
 	@echo "  help:              Print this help message."
+	@echo ""
 
 # regenerate the Makefile
 Makefile: config/makefiles/root.in
@@ -78,15 +86,23 @@ driver_nqp.pbc: src/builtins/all.pbc driver_nqp.pir
 src/builtins/all.pbc: src/builtins/all.pir
 	$(PARROT) -o src/builtins/all.pbc src/builtins/all.pir
 
+# testing
+test: build
+	$(PERL) t/harness
+
+# run the test suite, create a TAP archive and send it off to smolder
+smoke : build
+	- $(PERL) t/harness --archive --send-to-smolder
+
 # cleaning up
 
-clean: dynext-clean test-clean
+clean: clean-pmc clean-test
 	$(RM_F) \
   stst.out \
   driver_nqp.pbc \
   src/builtins/all.pbc
 
-dynext-clean:
+clean-pmc:
 	$(RM_F) \
   $(PMC_DIR)/*.h \
   $(PMC_DIR)/*.c \
@@ -103,10 +119,7 @@ dynext-clean:
 realclean: clean
 	$(RM_F) Makefile
 
-# testing
-test: build
-	$(PERL) t/harness
-
-test-clean:
-	$(RM_F) t/*.nqp
-	$(RM_F) t/*.pir
+# Local variables:
+#   mode: makefile
+# End:
+# vim: ft=make:
