@@ -33,6 +33,11 @@ Or use the Perl-Wrapper for selecting the appropriate program and options.
 
    perl eclectus.pl t/unary_primitives.t
 
+As an intermediate result a PAST-Datastructure ist generated and saved as a file.
+This intermediate file can for example be executed with:
+
+  ../../parrot driver_nqp.pbc t/unary_primitives_0.nqp
+
 =head1 TODO
 
 - support for strings
