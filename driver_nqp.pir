@@ -62,7 +62,7 @@
 
 
 .sub '__initconst' :init
-    $P0 = new [ 'EclectusBoolean' ]
+    $P0 = new 'EclectusBoolean'
     $P0 = 1
     set_root_global ['_eclectus'], '#t', $P0
     $P0 = new 'EclectusBoolean'

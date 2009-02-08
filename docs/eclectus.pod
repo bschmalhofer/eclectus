@@ -36,6 +36,10 @@ This intermediate file can for example be executed with:
 
   ../../parrot driver_nqp.pbc t/unary_primitives_0.nqp
 
+=head1 Dependencies
+
+Test::Harness::Archive
+
 =head1 TODO
 
 - support for strings
