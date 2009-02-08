@@ -38,7 +38,7 @@ else {
         plan skip_all => 'gauche 0.8 is needed for running this test';
     }
     else {
-        exec 'gosh', '-fcase-fold', '-I', '.',  '-l', 'gauche/prelude.scm', $scheme_fn;
+        exec 'gosh', '-fcase-fold', '-I', '.', '-I', 'riaxpander', '-l', 'gauche/prelude.scm', $scheme_fn;
     }
 }
 
