@@ -1,10 +1,7 @@
-# The dynamics PMCs used by Eclectus are loaded
-.loadlib 'eclectus_group'
-
 # for devel
 .include 'library/dumper.pir'
 
-.namespace []
+.namespace ['Eclectus']
 
 .sub '__onload' :init
     load_bytecode 'PGE.pbc'
@@ -14,6 +11,13 @@
     load_bytecode 'PCT.pbc'
 
     load_bytecode 'languages/eclectus/src/builtins/all.pbc'
+
+    # The dynamics PMCs used by Eclectus are loaded
+    loadlib $P1, 'pair'
+    _dumper( 'p1',  $P1 )
+    loadlib $P1, 'eclectus_group'
+    _dumper( 'p1',  $P1 )
+
 .end
 
 
@@ -58,7 +62,7 @@
 
 
 .sub '__initconst' :init
-    $P0 = new 'EclectusBoolean'
+    $P0 = new [ 'EclectusBoolean' ]
     $P0 = 1
     set_root_global ['_eclectus'], '#t', $P0
     $P0 = new 'EclectusBoolean'

@@ -12,11 +12,11 @@ t/pmc/boolean.t - Boolean PMC
 
 =head1 DESCRIPTION
 
-Tests C<PhpBoolean> PMC.
+Tests C<EclectusBoolean> PMC.
 
 =cut
 
-.loadlib "php_group"
+.loadlib "eclectus_group"
 
 .sub 'main' :main
     .include "include/test_more.pir"
@@ -28,14 +28,14 @@ Tests C<PhpBoolean> PMC.
 .sub truth_tests
     .local pmc true, false
 
-    true = new 'PhpBoolean'
+    true = new 'EclectusBoolean'
     true = 1
 
-    false = new 'PhpBoolean'
+    false = new 'EclectusBoolean'
     false = 0
 
-    is(true, 1, "true PhpBoolean is 1")
-    is(false, "", "false PhpBoolean is empty")
+    is(true, 1, "true EclectusBoolean is 1")
+    is(false, "", "false EclectusBoolean is empty")
 .end
 
 # Local Variables:
