@@ -1,20 +1,18 @@
 #! perl
 
-# Copyright (C) 2007-2008, The Perl Foundation.
+# Copyright (C) 2007-2009, The Perl Foundation.
 # $Id$
 
-# A wrapper around a Scheme test file
+# A wrapper for running scheme scripts with Eclectus
 
 use strict;
 use warnings;
-
 use FindBin;
 use lib "$FindBin::Bin/../../../lib";
 
 use Test::More;
-use Data::Dumper;
 
-( my $t_fn = $FindBin::Script ) =~ s/\.pl$/\.t/;
+my ( $scheme_fn ) = @ARGV;
 
 
 if ($^O eq 'MSWin32') {
@@ -22,14 +20,12 @@ if ($^O eq 'MSWin32') {
     # 7.4 is the current version
     my $petite_version = `petite --version 2>&1` || q{};
     my $has_petite = $petite_version =~ /^7.4/;
-    #diag( Dumper( $petite_version, $has_petite ) );
 
     if ( ! $has_petite ) {
         plan skip_all => 'petite 7.4 is needed for running this test';
     }
     else {
-        chdir 'eclectus';
-        exec 'petite', '--script', "t/$t_fn";
+        exec 'petite', '--script', $scheme_fn;
     }
 }
 else {
@@ -38,14 +34,11 @@ else {
     my $gauche_version = `gosh -V 2>&1` || q{};
     my $has_gauche = $gauche_version =~ m/  0\.8 # inexact version
                                          /xms;
-    #diag( Dumper( $gauche_version, $has_gauche ) );
-
     if ( ! $has_gauche ) {
         plan skip_all => 'gauche 0.8 is needed for running this test';
     }
     else {
-        chdir 'eclectus';
-        exec 'gosh', '-fcase-fold', '-I', '.',  '-l', 'gauche/prelude.scm', "t/$t_fn";
+        exec 'gosh', '-fcase-fold', '-I', '.',  '-l', 'gauche/prelude.scm', $scheme_fn;
     }
 }
 
