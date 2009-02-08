@@ -1,4 +1,4 @@
-# Copyright (C) 2007-2008, The Perl Foundation.
+# Copyright (C) 2007-2009, The Perl Foundation.
 # $Id$
 
 # Makefile for languages/eclectus
@@ -64,6 +64,8 @@ Makefile: config/makefiles/root.in
 
 # Compilation:
 build: $(ECLECTUS_GROUP) driver_nqp.pbc
+
+export DYNPMC_INCLUDE=$(BUILD_DIR)/src/dynpmc
 
 $(ECLECTUS_GROUP): $(PARROT) $(PMC_SOURCES)
 	cd $(PMC_DIR) && $(BUILD_DYNPMC) generate $(PMCS)
