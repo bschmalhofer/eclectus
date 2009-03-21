@@ -16,9 +16,9 @@ Tests C<EclectusBoolean> PMC.
 
 =cut
 
-.loadlib "eclectus_group"
-
 .sub 'main' :main
+    $P0 = loadlib "eclectus_group"
+
     .include "include/test_more.pir"
     plan(2)
 

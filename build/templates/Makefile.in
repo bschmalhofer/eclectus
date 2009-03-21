@@ -1,52 +1,52 @@
-# Makefile for languages/eclectus
+# Makefile for eclectus
 
 # configuration settings
-BUILD_DIR       := @build_dir@
-LOAD_EXT        := @load_ext@
-O               := @o@
+VERSION_DIR   := @versiondir@
+BIN_DIR       := @bin_dir@
+LIB_DIR       := @lib_dir@$(VERSION_DIR)
+DOC_DIR       := @doc_dir@$(VERSION_DIR)
+MANDIR        := @mandir@$(VERSION_DIR)
 
-# Set up commands
-PARROT          := ../../parrot@exe@
-PERL            := @perl@
-RM_F            := @rm_f@
-BUILD_DYNPMC    := $(PERL) @build_dir@/tools/build/dynpmc.pl
-#IF(darwin):
-#IF(darwin):# MACOSX_DEPLOYMENT_TARGET must be defined for OS X compilation/linking
-#IF(darwin):export MACOSX_DEPLOYMENT_TARGET := @osx_version@
+# Set up extensions
+LOAD_EXT      := @load_ext@
+O             := @o@
+EXE           := @exe@
 
 # Set up directories
-PARROT_DYNEXT := @build_dir@/runtime/parrot/dynext
+BUILD_DIR     := @build_dir@
+LIBRARY_DIR   := $(BUILD_DIR)/runtime/parrot/library
 PMC_DIR       := src/pmc
+DYNEXT_DIR    := dynext
 
-ECLECTUS_GROUP  := $(PMC_DIR)/eclectus_group@load_ext@
-PMCS            := \
-    eclectusboolean \
-    eclectuscharacter \
-    eclectusemptylist \
-    eclectusfixnum \
-    eclectuspair \
-    eclectusstring \
-    eclectusvector
-PMC_SOURCES     := \
-    $(PMC_DIR)/eclectusboolean.pmc \
-    $(PMC_DIR)/eclectuscharacter.pmc \
-    $(PMC_DIR)/eclectusemptylist.pmc \
-    $(PMC_DIR)/eclectusfixnum.pmc \
-    $(PMC_DIR)/eclectuspair.pmc \
-    $(PMC_DIR)/eclectusstring.pmc \
-    $(PMC_DIR)/eclectusvector.pmc
+# Set up commands
+MAKE          := @make_c@
+PARROT        := $(BUILD_DIR)/parrot$(EXE)
+PERL          := @perl@
+RM_F          := @rm_f@
+
+PMC_GROUP     := $(DYNEXT_DIR)/pipp_group$(LOAD_EXT)
+
+PMC_DEPS      := \
+  $(PMC_DIR)/eclectusboolean.pmc \
+  $(PMC_DIR)/eclectuscharacter.pmc \
+  $(PMC_DIR)/eclectusemptylist.pmc \
+  $(PMC_DIR)/eclectusfixnum.pmc \
+  $(PMC_DIR)/eclectuspair.pmc \
+  $(PMC_DIR)/eclectusstring.pmc \
+  $(PMC_DIR)/eclectusvector.pmc
 
 
-# The default target
-default: build
+
+# default 
+all: build
 
 # This is a listing of all targets, that are meant to be called by users
-help :
+help:
 	@echo ""
 	@echo "Following targets are available for the user:"
 	@echo ""
 	@echo "Building:"
-	@echo "  build:             Builds the dynamic PMCSs needed by Eclectus."
+	@echo "  all:               Build the dynamic PMCSs needed by Eclectus."
 	@echo "                     This is the default target."
 	@echo ""
 	@echo "Testing:"
@@ -68,15 +68,12 @@ Makefile: build/templates/Makefile.in
 	$(PERL) Configure.pl
 
 # Compilation:
-build: $(ECLECTUS_GROUP) driver_nqp.pbc
+build: $(PMC_GROUP) driver_nqp.pbc
 
-export DYNPMC_INCLUDE=$(BUILD_DIR)/src/dynpmc
+$(PMC_GROUP): $(PMC_DEPS) 
+	$(MAKE) $(PMC_DIR) build
 
-$(ECLECTUS_GROUP): $(PARROT) $(PMC_SOURCES)
-	cd $(PMC_DIR) && $(BUILD_DYNPMC) generate $(PMCS)
-	cd $(PMC_DIR) && $(BUILD_DYNPMC) compile $(PMCS)
-	cd $(PMC_DIR) && $(BUILD_DYNPMC) linklibs $(PMCS)
-	cd $(PMC_DIR) && $(BUILD_DYNPMC) copy --destination=$(PARROT_DYNEXT) $(PMCS)
+export DYNPMC_INCLUDE=@build_dir@/src/dynpmc
 
 driver_nqp.pbc: src/builtins/all.pbc driver_nqp.pir
 	$(PARROT) -o driver_nqp.pbc driver_nqp.pir
@@ -89,7 +86,7 @@ test: build
 	$(PERL) t/harness
 
 # run the test suite, create a TAP archive and send it off to smolder
-smoke : build
+smoke: all
 	- $(PERL) t/harness --archive --send-to-smolder
 
 # cleaning up
@@ -100,23 +97,13 @@ clean: clean-pmc clean-test
   driver_nqp.pbc \
   src/builtins/all.pbc
 
-# nothing to do
-clean-test:
 
 
 clean-pmc:
-	$(RM_F) \
-  $(PMC_DIR)/*.h \
-  $(PMC_DIR)/*.c \
-  $(PMC_DIR)/*.dump \
-  $(PMC_DIR)/*$(O) \
-  $(PMC_DIR)/*$(LOAD_EXT) \
-  $(PMC_DIR)/*.exp \
-  $(PMC_DIR)/*.ilk \
-  $(PMC_DIR)/*.manifest \
-  $(PMC_DIR)/*.pdb \
-  $(PMC_DIR)/*.lib
+	$(MAKE) $(PMC_DIR) clean
 
+# nothing to do
+clean-test:
 
 realclean: clean
 	$(RM_F) Makefile

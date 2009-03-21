@@ -1,4 +1,4 @@
-# Build the PMCs for Pipp.
+# Build the PMCs for Eclectus.
 
 # Set up commands
 PERL          := @perl@
@@ -20,31 +20,29 @@ INSTALL_DIR   := $(LIB_DIR)/dynext
 LOAD_EXT      := @load_ext@
 O             := @o@
 
-PIPP_GROUP    := $(DYNEXT_DIR)/pipp_group$(LOAD_EXT)
+PMC_GROUP    := $(DYNEXT_DIR)/eclectus_group$(LOAD_EXT)
 
 PMCS          := \
-  php \
-  phparray \
-  phpboolean \
-  phpfloat \
-  phpinteger \
-  phpresource \
-  phpstring \
-  phpnull
+  eclectusboolean \
+  eclectuscharacter \
+  eclectusemptylist \
+  eclectusfixnum \
+  eclectuspair \
+  eclectusstring \
+  eclectusvector
 
 PMC_SOURCES := \
-  php.pmc \
-  phparray.pmc \
-  phpboolean.pmc \
-  phpfloat.pmc \
-  phpinteger.pmc \
-  phpresource.pmc \
-  phpstring.pmc \
-  phpnull.pmc
+  eclectusboolean.pmc \
+  eclectuscharacter.pmc \
+  eclectusemptylist.pmc \
+  eclectusfixnum.pmc \
+  eclectuspair.pmc \
+  eclectusstring.pmc \
+  eclectusvector.pmc
 
 
 # default
-build: $(PIPP_GROUP)
+build: $(PMC_GROUP)
 
 
 # This is a listing of all targets, that are meant to be called by users
@@ -60,7 +58,7 @@ help:
 	@echo "  clean:             Clean up."
 	@echo ""
 
-$(PIPP_GROUP): $(PMC_SOURCES)
+$(PMC_GROUP): $(PMC_SOURCES)
 	$(PMCBUILD) generate $(PMCS)
 	$(PMCBUILD) compile $(PMCS)
 	$(PMCBUILD) linklibs $(PMCS)
@@ -72,5 +70,5 @@ install:
 
 # cleaning up
 clean:
-	$(RM_F) "*dump" "php*.c" "pmc_*h" "pipp_group.h" "*$(O)" "*$(LOAD_EXT)"
+	$(RM_F) "*dump" "eclectus*.c" "pmc_*h" "eclectus_group.h" "*$(O)" "*$(LOAD_EXT)"
 
