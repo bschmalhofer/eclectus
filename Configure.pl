@@ -76,6 +76,7 @@ END
 create_files(
     \%config,
     { 'build/templates/Makefile.in'                => 'Makefile',
+      'build/templates/src/pmc/Makefile.in'        => 'src/pmc/Makefile',
     }
 );
 

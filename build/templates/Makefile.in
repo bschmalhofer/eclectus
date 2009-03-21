@@ -1,27 +1,25 @@
-# Copyright (C) 2007-2009, The Perl Foundation.
-
 # Makefile for languages/eclectus
 
 # configuration settings
-BUILD_DIR       = @build_dir@
-LOAD_EXT        = @load_ext@
-O               = @o@
+BUILD_DIR       := @build_dir@
+LOAD_EXT        := @load_ext@
+O               := @o@
 
 # Set up commands
-PARROT          = ../../parrot@exe@
-PERL            = @perl@
-RM_F            = @rm_f@
-BUILD_DYNPMC    = $(PERL) @build_dir@/tools/build/dynpmc.pl
+PARROT          := ../../parrot@exe@
+PERL            := @perl@
+RM_F            := @rm_f@
+BUILD_DYNPMC    := $(PERL) @build_dir@/tools/build/dynpmc.pl
 #IF(darwin):
 #IF(darwin):# MACOSX_DEPLOYMENT_TARGET must be defined for OS X compilation/linking
 #IF(darwin):export MACOSX_DEPLOYMENT_TARGET := @osx_version@
 
 # Set up directories
-PARROT_DYNEXT = @build_dir@/runtime/parrot/dynext
-PMC_DIR       = src/pmc
+PARROT_DYNEXT := @build_dir@/runtime/parrot/dynext
+PMC_DIR       := src/pmc
 
-ECLECTUS_GROUP  = $(PMC_DIR)/eclectus_group@load_ext@
-PMCS            = \
+ECLECTUS_GROUP  := $(PMC_DIR)/eclectus_group@load_ext@
+PMCS            := \
     eclectusboolean \
     eclectuscharacter \
     eclectusemptylist \
@@ -29,7 +27,7 @@ PMCS            = \
     eclectuspair \
     eclectusstring \
     eclectusvector
-PMC_SOURCES     = \
+PMC_SOURCES     := \
     $(PMC_DIR)/eclectusboolean.pmc \
     $(PMC_DIR)/eclectuscharacter.pmc \
     $(PMC_DIR)/eclectusemptylist.pmc \

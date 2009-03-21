@@ -1,0 +1,76 @@
+# Build the PMCs for Pipp.
+
+# Set up commands
+PERL          := @perl@
+CP            := @cp@
+RM_F          := @rm_f@
+PMCBUILD      := $(PERL) @build_dir@/tools/build/dynpmc.pl
+CC            := @cc@
+CFLAGS        := @ccflags@ @cc_shared@ @cc_debug@ @ccwarn@ @cc_hasjit@ @cg_flag@ @gc_flag@
+
+# Set up directories
+BUILD_DIR     := @build_dir@
+INCLUDE_DIR   := $(BUILD_DIR)/include
+DYNEXT_DIR    := ../../dynext
+VERSION_DIR   := @versiondir@
+LIB_DIR       := @libdir@$(VERSION_DIR)
+INSTALL_DIR   := $(LIB_DIR)/dynext
+
+# Set up extensions
+LOAD_EXT      := @load_ext@
+O             := @o@
+
+PIPP_GROUP    := $(DYNEXT_DIR)/pipp_group$(LOAD_EXT)
+
+PMCS          := \
+  php \
+  phparray \
+  phpboolean \
+  phpfloat \
+  phpinteger \
+  phpresource \
+  phpstring \
+  phpnull
+
+PMC_SOURCES := \
+  php.pmc \
+  phparray.pmc \
+  phpboolean.pmc \
+  phpfloat.pmc \
+  phpinteger.pmc \
+  phpresource.pmc \
+  phpstring.pmc \
+  phpnull.pmc
+
+
+# default
+build: $(PIPP_GROUP)
+
+
+# This is a listing of all targets, that are meant to be called by users
+help:
+	@echo ""
+	@echo "Following targets are available for the user:"
+	@echo ""
+	@echo "Building:"
+	@echo "  build:             Build the PMCs."
+	@echo "                     This is the default."
+	@echo ""
+	@echo "Cleaning:"
+	@echo "  clean:             Clean up."
+	@echo ""
+
+$(PIPP_GROUP): $(PMC_SOURCES)
+	$(PMCBUILD) generate $(PMCS)
+	$(PMCBUILD) compile $(PMCS)
+	$(PMCBUILD) linklibs $(PMCS)
+	$(PMCBUILD) copy "--destination=$(DYNEXT_DIR)" $(PMCS)
+
+install:
+#IF(cygwin or hpux):	CHMOD 0775 "*$(LOAD_EXT)"
+	$(CP) "*$(LOAD_EXT)" $(INSTALL_DIR)
+
+# cleaning up
+clean:
+	$(RM_F) "*dump" "php*.c" "pmc_*h" "pipp_group.h" "*$(O)" "*$(LOAD_EXT)"
+
