@@ -102,6 +102,10 @@ clean: clean-pmc clean-test
   driver_nqp.pbc \
   src/builtins/all.pbc
 
+# nothing to do
+clean-test:
+
+
 clean-pmc:
 	$(RM_F) \
   $(PMC_DIR)/*.h \
