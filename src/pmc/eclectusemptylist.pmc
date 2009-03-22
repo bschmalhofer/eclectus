@@ -27,7 +27,7 @@ pmclass EclectusEmptyList
     maps Integer {
 
     STRING* get_string() {
-        return const_string(INTERP, "()");
+        return CONST_STRING(INTERP, "()");
     }
 
     /* the empty list is not #f, therefore evaluates to true */

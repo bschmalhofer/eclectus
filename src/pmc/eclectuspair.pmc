@@ -275,7 +275,7 @@ Used to unarchive the Pair.
     }
 
     STRING* get_string() {
-        return const_string(INTERP, "()");
+        return CONST_STRING(INTERP, "()");
     }
 
     /* a pair is not #f, therefore evaluates to true */
