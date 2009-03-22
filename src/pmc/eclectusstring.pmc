@@ -27,7 +27,7 @@ pmclass EclectusString
     maps String {
 
     /* all Strings are not #f, therefore evaluate to true */
-    INTVAL get_bool() {
+    VTABLE INTVAL get_bool() {
         return 1;
     }
 

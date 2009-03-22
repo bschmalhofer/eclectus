@@ -274,12 +274,12 @@ Used to unarchive the Pair.
         pair->value = VTABLE_shift_pmc(interp, io);
     }
 
-    STRING* get_string() {
+    VTABLE STRING* get_string() {
         return CONST_STRING(INTERP, "()");
     }
 
     /* a pair is not #f, therefore evaluates to true */
-    INTVAL get_bool() {
+    VTABLE INTVAL get_bool() {
         return 1;
     }
 /*
