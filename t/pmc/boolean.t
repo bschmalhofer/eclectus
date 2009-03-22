@@ -14,12 +14,18 @@ Tests C<EclectusBoolean> PMC.
 
 .sub 'main' :main
     $P0 = loadlib "eclectus_group"
+    unless $P0 goto LOADING_FAILED
 
     .include "include/test_more.pir"
 
     plan(2)
 
     truth_tests()
+    exit 0
+
+  LOADING_FAILED:
+    say "# eclectus_group could not be loaded"
+
 .end
 
 .sub truth_tests
