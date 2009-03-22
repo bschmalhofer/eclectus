@@ -36,4 +36,7 @@
 /src/pmc/pmc_eclectusstring.h
 /src/pmc/pmc_eclectusvector.h
 /stst.out
-/t/*.nqp
+/t/scheme/*.nqp
+/t/scheme/*.pir
+*.nqp
+*.pir

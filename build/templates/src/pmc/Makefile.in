@@ -27,10 +27,9 @@ PMCS          := \
   eclectuscharacter \
   eclectusemptylist \
   eclectusfixnum \
+  eclectuspair \
   eclectusstring \
   eclectusvector
-
-  #eclectuspair \
 
 PMC_SOURCES := \
   eclectusboolean.pmc \

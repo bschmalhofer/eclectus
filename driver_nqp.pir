@@ -14,9 +14,9 @@
 
     # The dynamics PMCs used by Eclectus are loaded
     loadlib $P1, 'pair'
-    _dumper( 'p1',  $P1 )
+    #_dumper( 'p1',  $P1 )
     loadlib $P1, 'eclectus_group'
-    _dumper( 'p1',  $P1 )
+    #_dumper( 'p1',  $P1 )
 
 .end
 

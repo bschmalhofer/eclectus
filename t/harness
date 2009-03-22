@@ -66,7 +66,7 @@ $verbosity ||= 0;
               return [ "$path_to_parrot/parrot$PConfig{exe}", $test_file ] if $test_file =~ m!t/pmc/.*[.]t$!;
 
               # the directory t/scheme contains only test scripts written in scheme
-              if ( $test_file =~ m!t/in_php/.*[.]t$! ) {
+              if ( $test_file =~ m!t/scheme/.*[.]t$! ) {
                   if ($^O eq 'MSWin32') {
                       return [ 'csi', '-R', 'alexpander', '-i', '-k', 'none', '-I', 'riaxpander',
                                '-e', '(load "chicken/prelude.scm")', '-s', $test_file ];
