@@ -1,7 +1,3 @@
-#! ../../parrot
-# Copyright (C) 2008, The Perl Foundation.
-# $Id$
-
 =head1 NAME
 
 t/pmc/boolean.t - Boolean PMC
@@ -20,6 +16,7 @@ Tests C<EclectusBoolean> PMC.
     $P0 = loadlib "eclectus_group"
 
     .include "include/test_more.pir"
+
     plan(2)
 
     truth_tests()

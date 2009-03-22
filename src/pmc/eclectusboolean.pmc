@@ -1,5 +1,4 @@
 /*
-Copyright (C) 2007, The Perl Foundation.
 
 =head1 NAME
 
@@ -18,20 +17,30 @@ boolean behavior.
 
 */
 
+
+
 pmclass EclectusBoolean
-    extends Boolean
-    does boolean
+    extends  Boolean
+    provides scalar
+    provides boolean
+    provides integer
     dynpmc
-    group eclectus_group
-    hll Eclectus
-    maps Boolean {
+    group    eclectus_group
+    hll      Eclectus
+    maps     Boolean {
 
+=item C<STRING* get_string()>
+
+Return the string '1' or ''.
+
+=cut
+
+*/
     STRING* get_string() {
-        return PMC_int_val(SELF) ?
-                   const_string(INTERP, "#t")
-                   :
-                   const_string(INTERP, "#f");
-
+        if (SELF.get_integer())
+            return Parrot_str_new_constant(INTERP, "#t");
+        else
+            return Parrot_str_new_constant(INTERP, "#f");
     }
 }
 
