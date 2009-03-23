@@ -29,9 +29,24 @@ pmclass EclectusBoolean
     hll      Eclectus
     maps     Boolean {
 
+
+/*
+
+=item C<STRING* name()>
+
+Return the string "boolean".
+
+=cut
+
+*/
+    VTABLE STRING* name() {
+        return Parrot_str_new_constant(INTERP, "EclectusBool");
+    }
+
+
 =item C<STRING* get_string()>
 
-Return the string '1' or ''.
+Return the string '#t' or '#f'.
 
 =cut
 

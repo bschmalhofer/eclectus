@@ -18,9 +18,10 @@ Tests C<EclectusBoolean> PMC.
 
     .include "test_more.pir"
 
-    plan(4)
+    plan(6)
 
     truth_tests()
+    type_tests()
     exit 0
 
   LOADING_FAILED:
@@ -42,6 +43,20 @@ Tests C<EclectusBoolean> PMC.
 
     is(true, "#t", "false EclectusBoolean is #t")
     is(false, "#f", "false EclectusBoolean is #f")
+.end
+
+.sub type_tests
+    .local pmc true, false
+    .local string true_type, false_type
+    true = new 'EclectusBoolean'
+    true = 1
+    true_type = typeof true
+    is(true_type, "EclectusBool", "type of true")
+
+    false = new 'EclectusBoolean'
+    false = 0
+    false_type = typeof false
+    is(false_type, "EclectusBool", "type of false")
 .end
 
 # Local Variables:
