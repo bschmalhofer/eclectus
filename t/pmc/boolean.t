@@ -18,7 +18,7 @@ Tests C<EclectusBoolean> PMC.
 
     .include "include/test_more.pir"
 
-    plan(2)
+    plan(4)
 
     truth_tests()
     exit 0
@@ -38,7 +38,10 @@ Tests C<EclectusBoolean> PMC.
     false = 0
 
     is(true, 1, "true EclectusBoolean is 1")
-    is(false, "", "false EclectusBoolean is empty")
+    is(false, 0, "false EclectusBoolean is 0")
+
+    is(true, "#t", "false EclectusBoolean is #t")
+    is(false, "#f", "false EclectusBoolean is #f")
 .end
 
 # Local Variables:
