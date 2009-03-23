@@ -38,6 +38,14 @@ Tests C<EclectusBoolean> PMC.
     false = new 'EclectusBoolean'
     false = 0
 
+    .local string s1
+    s1 = false
+    say false
+    say true
+    say s1
+    s1 = true
+    say s1
+
     is(true, 1, "true EclectusBoolean is 1")
     is(false, 0, "false EclectusBoolean is 0")
 

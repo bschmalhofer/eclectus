@@ -43,6 +43,7 @@ Return the string "boolean".
         return Parrot_str_new_constant(INTERP, "EclectusBool");
     }
 
+/*
 
 =item C<STRING* get_string()>
 
