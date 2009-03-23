@@ -20,16 +20,16 @@ character behavior. Derived from the Amber_CHARACTER PMC.
 
 pmclass EclectusCharacter
     extends Integer
-    does Integer
+    does    Integer
     dynpmc
-    group eclectus_group
-    hll Eclectus
-    maps Integer {
+    group   eclectus_group
+    hll     Eclectus
+    maps    Integer {
 
     VTABLE STRING* get_string() {
-        return string_append(INTERP,
-                             CONST_STRING(INTERP, "#\\"),
-                             string_chr(INTERP, PMC_int_val(SELF)));
+        return Parrot_str_append(INTERP,
+                                 CONST_STRING(INTERP, "#\\"),
+                                 string_chr(INTERP, SELF.get_integer()));
     }
 }
 
