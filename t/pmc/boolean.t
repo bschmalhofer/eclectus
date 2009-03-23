@@ -16,7 +16,7 @@ Tests C<EclectusBoolean> PMC.
     $P0 = loadlib "eclectus_group"
     unless $P0 goto LOADING_FAILED
 
-    .include "include/test_more.pir"
+    .include "test_more.pir"
 
     plan(4)
 
