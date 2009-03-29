@@ -1,9 +1,9 @@
 # for devel
-.include 'library/dumper.pir'
 
 .namespace ['Eclectus']
 
 .sub '__onload' :init
+    load_bytecode "dumper.pbc"
     load_bytecode 'PGE.pbc'
     load_bytecode 'PGE/Text.pbc'
     load_bytecode 'PGE/Util.pbc'
