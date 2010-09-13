@@ -25,11 +25,11 @@ tweaked to emit TAP.
 
 Run individual test scripts with e.g.:
 
-   gosh -fcase-fold -I .  -I riaxpander -l gauche/prelude.scm t/unary_primitives.t
+   gosh -fcase-fold -I .  -I riaxpander -l gauche/prelude.scm t/scheme/unary_primitives.t
 
 Or use the Perl-Wrapper for selecting the appropriate program and options.
 
-   perl eclectus.pl t/unary_primitives.t
+   perl eclectus.pl t/scheme/unary_primitives.t
 
 As an intermediate result a PAST-Datastructure ist generated and saved as a file.
 This intermediate file can for example be executed with:
